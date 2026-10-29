@@ -13,6 +13,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 
 // Configuration
 const MEDIA_DIR = path.join(__dirname, 'assets', 'media');
@@ -147,7 +148,7 @@ function generateManifest() {
     }
     
     // Write manifest to file
-    const manifestJson = JSON.stringify(manifest, null, 2);
+    const manifestJson = JSON.stringify(manifest, null, 2).replace(/\n/g, os.EOL);
     fs.writeFileSync(OUTPUT_FILE, manifestJson, 'utf8');
     
     console.log(`✓ Manifest generated successfully: ${OUTPUT_FILE}`);
