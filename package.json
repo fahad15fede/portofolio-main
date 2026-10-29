@@ -1,0 +1,17 @@
+{
+  "name": "fahad-portfolio",
+  "version": "1.0.0",
+  "description": "Muhammad Fahad Pervez - Portfolio Website",
+  "scripts": {
+    "build": "node generate-media-manifest.js",
+    "generate-manifest": "node generate-media-manifest.js"
+  },
+  "keywords": [
+    "portfolio",
+    "backend",
+    "ai",
+    "ml"
+  ],
+  "author": "Muhammad Fahad Pervez",
+  "license": "MIT"
+}

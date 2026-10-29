@@ -1,0 +1,5 @@
+{
+  "buildCommand": "node generate-media-manifest.js",
+  "outputDirectory": ".",
+  "installCommand": "echo 'No dependencies to install'"
+}

@@ -1,0 +1,2561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Muhammad Fahad Pervez — Backend Developer / AI Engineer">
+<title>Muhammad Fahad Pervez | Backend / AI</title>
+
+<style>
+/* =========================================================
+   SIMPLE SINGLE-FILE PORTFOLIO
+   Everything is contained in this HTML file.
+   Replace URLs marked with "REPLACE".
+   ========================================================= */
+
+:root{
+  --black:#101114;
+  --dark:#22252a;
+  --gray:#777;
+  --light:#e1e3e6;
+  --white:#fff;
+  --red:#8e1010;
+  --red2:#b51b1b;
+  --border:#c5c9cf;
+  --max:1200px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--black);
+  background:#f0f1f3;
+  line-height:1.5;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+img{max-width:100%;display:block}
+
+/* ---------- NAV ---------- */
+
+nav{
+  position:fixed;
+  top:18px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(94%,1200px);
+  z-index:100;
+  background:rgba(255,255,255,.84);
+  backdrop-filter:blur(12px);
+  border:1px solid #ddd;
+  border-radius:4px;
+  padding:13px 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 8px 30px rgba(0,0,0,.08);
+}
+.logo{
+  font-weight:800;
+  letter-spacing:2px;
+}
+.logo span{color:var(--red)}
+.nav-links{
+  display:flex;
+  gap:25px;
+  align-items:center;
+  font-size:12px;
+  letter-spacing:1px;
+}
+.nav-links a:hover{color:var(--red)}
+.resume-link{
+  background:#111;
+  color:white;
+  padding:8px 13px;
+}
+.menu{
+  display:none;
+  border:0;
+  background:none;
+  font-size:22px;
+}
+
+/* ---------- HERO / WHITE WALL ---------- */
+
+.hero{
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:100px 30px 50px;
+  background:
+    radial-gradient(ellipse at 50% 42%,#f7f8f9 0%,#e6e8eb 38%,#b9bdc3 76%,#70757d 100%);
+}
+
+/* subtle architectural wall lines */
+.hero:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:.25;
+  background:
+    linear-gradient(90deg,transparent 49.8%,rgba(0,0,0,.12) 50%,transparent 50.2%);
+  pointer-events:none;
+}
+
+.hero-info{
+  display:none;
+}
+.tiny{
+  color:#777;
+  font-size:10px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.hero-center{
+  width:min(600px,70vw);
+  height:650px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  perspective:1200px;
+}
+
+
+/* ---------- HALLWAY BEHIND THE DOOR ---------- */
+/* The door now opens into a simple architectural hallway. */
+.hallway{
+  position:absolute;
+  width:420px;
+  height:570px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  overflow:hidden;
+  z-index:1;
+  background:#d9d9d9;
+  border:1px solid #aaa;
+  box-shadow:inset 0 0 70px rgba(0,0,0,.22);
+}
+
+/* ceiling, side walls and floor create the hallway perspective */
+.hallway .ceiling{
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:38%;
+  background:linear-gradient(#f7f7f7,#d5d5d5);
+  clip-path:polygon(0 0,100% 0,72% 100%,28% 100%);
+}
+.hallway .left-wall,
+.hallway .right-wall{
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:50%;
+  background:linear-gradient(90deg,#f4f4f4,#c7c7c7);
+}
+.hallway .left-wall{
+  left:0;
+  clip-path:polygon(0 0,56% 31%,56% 67%,0 100%);
+}
+.hallway .right-wall{
+  right:0;
+  background:linear-gradient(90deg,#c7c7c7,#f4f4f4);
+  clip-path:polygon(100% 0,44% 31%,44% 67%,100% 100%);
+}
+.hallway .floor{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:45%;
+  background:linear-gradient(#bdbdbd,#eeeeee 65%,#aaa);
+  clip-path:polygon(0 100%,100% 100%,72% 0,28% 0);
+}
+.hallway .back-wall{
+  position:absolute;
+  left:28%;
+  right:28%;
+  top:30%;
+  bottom:33%;
+  background:linear-gradient(180deg,#ffffff,#efefef);
+  border:1px solid #bbb;
+  box-shadow:0 8px 25px rgba(0,0,0,.15);
+}
+
+/* New white-background John artwork, larger and cleaner */
+.hallway .wall-smiley{
+  position:absolute;
+  z-index:4;
+  width:min(38vw, 360px);
+  max-width:360px;
+  height:auto;
+  left:50%;
+  top:44%;
+  transform:translate(-50%,-50%);
+  opacity:.85;
+  filter:blur(15px) saturate(0.8) drop-shadow(0 0 0 rgba(0,0,0,0));
+  background:rgba(255,255,255,.8);
+  border-radius:18px;
+  padding:8px;
+  transition:transform .9s cubic-bezier(.2,.75,.15,1), filter .9s cubic-bezier(.2,.75,.15,1), opacity .9s cubic-bezier(.2,.75,.15,1);
+}
+
+.hero-center.door-open .hallway .wall-smiley{
+  opacity:1;
+  filter:blur(0) drop-shadow(0 10px 18px rgba(0,0,0,.12));
+  transform:translate(-50%,-50%) scale(1.02);
+}
+
+/* subtle hallway lights */
+.hallway .light{
+  position:absolute;
+  z-index:5;
+  width:70px;
+  height:5px;
+  top:20%;
+  background:#fff;
+  border-radius:50%;
+  box-shadow:0 0 18px rgba(255,255,255,.95);
+}
+.hallway .light.one{left:13%}
+.hallway .light.two{right:13%}
+.hallway .light.three{
+  width:48px;
+  top:28%;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.hallway-label{
+  position:absolute;
+  z-index:6;
+  left:50%;
+  bottom:12px;
+  transform:translateX(-50%);
+  color:#777;
+  font:8px monospace;
+  letter-spacing:2px;
+  white-space:nowrap;
+}
+
+/* ---------- SIMPLE 3D PIVOT DOOR ---------- */
+
+.door-shadow{
+  position:absolute;
+  width:440px;
+  height:55px;
+  bottom:48px;
+  background:rgba(0,0,0,.28);
+  filter:blur(18px);
+  border-radius:50%;
+}
+
+.door-frame{
+  position:relative;
+  width:360px;
+  height:540px;
+  transform-style:preserve-3d;
+  transform-origin:left center;
+  transition:transform .9s cubic-bezier(.2,.75,.15,1);
+  cursor:pointer;
+  z-index:3;
+}
+
+.door-frame.open{
+  transform:rotateY(-68deg);
+}
+
+.door-glass{
+  position:absolute;
+  inset:12px;
+  background:linear-gradient(
+    120deg,
+    rgba(255,255,255,.72),
+    rgba(190,200,205,.28) 35%,
+    rgba(255,255,255,.1) 60%,
+    rgba(170,175,180,.38)
+  );
+  border:1px solid rgba(70,70,70,.45);
+  box-shadow:
+    inset 20px 0 35px rgba(255,255,255,.35),
+    inset -20px 0 35px rgba(0,0,0,.10);
+  backdrop-filter:blur(4px);
+  overflow:hidden;
+}
+
+.door-glass:after{
+  content:"";
+  position:absolute;
+  top:-20%;
+  left:-50%;
+  width:35%;
+  height:150%;
+  transform:rotate(15deg);
+  background:rgba(255,255,255,.5);
+  transition:left .8s;
+}
+.door-frame:hover .door-glass:after{left:110%}
+
+.metal{
+  position:absolute;
+  background:linear-gradient(90deg,#555,#ddd,#666,#eee,#555);
+  box-shadow:0 1px 5px rgba(0,0,0,.35);
+  z-index:2;
+}
+.metal.top,.metal.bottom{left:0;right:0;height:13px}
+.metal.top{top:0}.metal.bottom{bottom:0}
+.metal.left,.metal.right{top:0;bottom:0;width:13px}
+.metal.left{left:0}.metal.right{right:0}
+
+.center-bar{
+  position:absolute;
+  left:65%;
+  top:0;
+  bottom:0;
+  width:3px;
+  background:rgba(70,70,70,.45);
+  transform:translateX(-50%);
+}
+
+.handle{
+  position:absolute;
+  right:34px;
+  top:45%;
+  width:8px;
+  height:85px;
+  background:linear-gradient(#555,#ddd,#555);
+  z-index:5;
+  border-radius:2px;
+}
+
+.door-label{
+  position:absolute;
+  left:34px;
+  bottom:26px;
+  color:#2b2b2b;
+  text-shadow:0 1px 0 rgba(255,255,255,.35);
+}
+.door-office-kicker,
+.door-office-role,
+.door-meta span{
+  display:block;
+  font-size:9px;
+  letter-spacing:2.4px;
+  font-weight:600;
+  line-height:1.6;
+}
+.door-label strong{
+  display:block;
+  margin:9px 0 11px;
+  font-size:24px;
+  line-height:1.02;
+  letter-spacing:-.7px;
+  color:#1d1d1d;
+}
+.door-meta{
+  margin-top:6px;
+}
+.door-office-role,
+.door-meta span{
+  font-size:10px;
+  letter-spacing:2px;
+  color:#444;
+}
+
+/* small floor / wall details */
+.wall-mark{
+  position:absolute;
+  bottom:60px;
+  font-size:9px;
+  letter-spacing:2px;
+  color:#888;
+}
+.wall-mark.left{left:7%}.wall-mark.right{right:7%}
+
+.hero-buttons{
+  position:absolute;
+  bottom:-8px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:10px;
+  z-index:5;
+}
+.btn{
+  display:inline-block;
+  padding:12px 19px;
+  border:1px solid #222;
+  font-size:11px;
+  letter-spacing:1px;
+  transition:.25s;
+}
+.btn.dark{background:#111;color:#fff}
+.btn:hover{transform:translateY(-2px);background:var(--red);border-color:var(--red);color:#fff}
+
+.scroll{
+  position:absolute;
+  bottom:25px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:9px;
+  color:#777;
+  letter-spacing:2px;
+}
+
+/* ---------- GENERAL SECTIONS ---------- */
+
+.section{
+  max-width:var(--max);
+  margin:auto;
+  padding:130px 35px;
+}
+.section-label{
+  font-size:10px;
+  color:#777;
+  letter-spacing:2px;
+  margin-bottom:20px;
+}
+.section-title{
+  font-size:clamp(48px,7vw,90px);
+  line-height:.9;
+  letter-spacing:-4px;
+  margin-bottom:60px;
+}
+.section-title span{color:#888}
+
+/* ---------- ABOUT ---------- */
+
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:center;
+}
+.about-copy{
+  font-size:25px;
+  line-height:1.35;
+}
+.about-card{
+  border:1px solid var(--border);
+  padding:40px;
+  min-height:350px;
+  background:linear-gradient(135deg,#f7f8fa,#dfe2e6);
+  box-shadow:15px 15px 0 #eee;
+}
+.about-card .big{
+  font-size:60px;
+  font-weight:800;
+  color:#ddd;
+}
+.about-card h3{margin:35px 0 5px}
+.about-card p{font-size:13px;color:#666}
+
+/* ---------- PROJECTS ---------- */
+
+.project{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:70px;
+  align-items:center;
+  margin-bottom:160px;
+}
+.project.reverse .visual{order:2}
+.project.reverse .project-info{order:1}
+
+.visual{
+  min-height:480px;
+  position:relative;
+  overflow:hidden;
+  border:1px solid #ccc;
+  background:#151515;
+  box-shadow:15px 15px 0 #eee;
+}
+
+/* LOOKOUT */
+.lookout{
+  height:480px;
+  background:
+    linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px),
+    #151515;
+  background-size:45px 45px;
+}
+.scan{
+  position:absolute;
+  left:0;right:0;
+  top:50%;
+  height:1px;
+  background:#b51b1b;
+  box-shadow:0 0 12px #b51b1b;
+  animation:scan 3s infinite;
+}
+@keyframes scan{
+  0%{top:15%}50%{top:85%}100%{top:15%}
+}
+.lookout-label{
+  position:absolute;
+  padding:15px;
+  color:#999;
+  font:10px monospace;
+  letter-spacing:2px;
+}
+.lookout-label.top{top:15px;left:15px}
+.lookout-label.bottom{bottom:15px;right:15px;color:#b51b1b}
+
+/* CRASH */
+.crash{
+  background:
+    radial-gradient(circle,#555 1px,transparent 2px),
+    #181818;
+  background-size:35px 35px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.orbit{
+  width:270px;height:160px;
+  border:1px solid #666;
+  border-radius:50%;
+  transform:rotate(-20deg);
+  position:absolute;
+}
+.orbit.two{
+  width:370px;height:220px;
+  transform:rotate(30deg);
+}
+.crash-core{
+  width:125px;height:125px;
+  border:1px solid #aaa;
+  border-radius:50%;
+  background:#111;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:2;
+}
+.crash-core strong{font-size:32px}
+.crash-tag{
+  position:absolute;
+  font:9px monospace;
+  color:#aaa;
+  border:1px solid #555;
+  padding:7px;
+}
+.crash-tag.a{left:12%;top:25%}
+.crash-tag.b{right:12%;top:65%}
+.crash-tag.c{right:15%;top:20%;color:#d04b4b}
+
+/* SPAM */
+.spam{
+  background:linear-gradient(135deg,#161616,#080808);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.mail{
+  width:72%;
+  background:#222;
+  border:1px solid #555;
+  padding:25px;
+  color:white;
+}
+.mail-top{
+  display:flex;
+  justify-content:space-between;
+  color:#777;
+  font:9px monospace;
+  border-bottom:1px solid #444;
+  padding-bottom:15px;
+}
+.mail h4{margin:25px 0 18px;font-size:18px}
+.mail-lines div{
+  height:5px;
+  background:#444;
+  margin:8px 0;
+}
+.classify{
+  margin-top:25px;
+  border-top:1px solid #444;
+  padding-top:15px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+.classify strong{color:#d02b2b;font-size:28px}
+
+/* project text */
+.project-no{
+  font:11px monospace;
+  color:#888;
+  letter-spacing:2px;
+}
+.project-info h2{
+  font-size:clamp(42px,5vw,72px);
+  line-height:.9;
+  letter-spacing:-3px;
+  margin:20px 0;
+}
+.project-info h2 span{color:#888}
+.category{
+  font:10px monospace;
+  letter-spacing:2px;
+  color:#888;
+}
+.project-info p{
+  color:#666;
+  max-width:520px;
+  font-size:15px;
+}
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin:25px 0;
+}
+.tags span{
+  border:1px solid #ddd;
+  padding:7px 9px;
+  font:9px monospace;
+  color:#666;
+}
+.links{
+  display:flex;
+  gap:20px;
+  margin-top:25px;
+}
+.links a{
+  font:10px monospace;
+  border-bottom:1px solid #999;
+  padding-bottom:6px;
+}
+.links a:hover{color:var(--red);border-color:var(--red)}
+
+.metrics{
+  display:flex;
+  gap:30px;
+  margin:30px 0;
+  flex-wrap:wrap;
+}
+.metric strong{font-size:36px}
+.metric small{
+  display:block;
+  color:#888;
+  font:9px monospace;
+  letter-spacing:1px;
+}
+
+/* ---------- SKILLS ---------- */
+
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+.skill{
+  border:1px solid var(--border);
+  padding:35px;
+  min-height:270px;
+  background:linear-gradient(135deg,#f8f9fa,#e0e3e8);
+  transition:.25s;
+}
+.skill:hover{
+  transform:translateY(-5px);
+  border-color:#999;
+}
+.skill-no{font:10px monospace;color:#999}
+.skill h3{margin:50px 0 20px;font-size:24px}
+.skill-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+}
+.skill-list span{
+  background:#fff;
+  border:1px solid #ddd;
+  padding:8px 10px;
+  font:10px monospace;
+}
+
+/* ---------- RESUME ---------- */
+
+.resume-box{
+  border:1px solid #ccc;
+  background:#111;
+  color:#fff;
+  padding:60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:40px;
+}
+.resume-box h2{
+  font-size:clamp(50px,7vw,90px);
+  line-height:.9;
+  letter-spacing:-4px;
+}
+.resume-box p{color:#999;margin-top:25px}
+.resume-actions{display:flex;gap:10px;flex-wrap:wrap}
+.resume-actions .btn{border-color:#777}
+
+/* ---------- CONTACT ---------- */
+
+.contact{
+  min-height:80vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.contact h2{
+  font-size:clamp(60px,10vw,140px);
+  line-height:.85;
+  letter-spacing:-7px;
+}
+.contact h2 span{color:#999}
+.contact-sub{
+  max-width:600px;
+  color:#777;
+  margin:35px 0;
+}
+.contact-list{
+  max-width:700px;
+  border-top:1px solid #ddd;
+}
+.contact-list a{
+  display:flex;
+  justify-content:space-between;
+  padding:18px 0;
+  border-bottom:1px solid #ddd;
+  font:12px monospace;
+}
+.contact-list a:hover{color:var(--red)}
+
+.service-request{
+  padding-top:30px;
+}
+.service-form-box{
+  display:grid;
+  grid-template-columns:0.9fr 1.1fr;
+  gap:30px;
+  border:1px solid #d0d4d8;
+  background:linear-gradient(135deg,#f9fafb,#ebedf0);
+  padding:36px;
+  box-shadow:15px 15px 0 #eceef1;
+}
+.service-copy h3{
+  font-size:clamp(32px,4vw,54px);
+  line-height:0.95;
+  letter-spacing:-2px;
+  margin-bottom:18px;
+}
+.service-copy p{
+  color:#666;
+  max-width:420px;
+}
+.service-form{
+  display:grid;
+  gap:20px;
+}
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+.service-form label{
+  display:grid;
+  gap:9px;
+  color:#333;
+  font:11px monospace;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+.service-form input,
+.service-form select,
+.service-form textarea{
+  width:100%;
+  padding:14px 16px;
+  border:1px solid #c8ccd2;
+  background:#fff;
+  color:#111;
+  font:15px Arial, Helvetica, sans-serif;
+  resize:vertical;
+}
+.service-form input:focus,
+.service-form select:focus,
+.service-form textarea:focus{
+  outline:none;
+  border-color:#8d1111;
+  box-shadow:0 0 0 3px rgba(143,18,18,.08);
+}
+.service-form button{
+  justify-self:start;
+  border:1px solid #111;
+  background:#111;
+  color:#fff;
+  padding:14px 22px;
+  font:11px monospace;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  cursor:pointer;
+}
+.service-form button:hover{
+  background:var(--red);
+  border-color:var(--red);
+}
+@media(max-width:760px){
+  .service-form-box,.form-row{grid-template-columns:1fr}
+  .service-form button{justify-self:stretch}
+}
+
+/* ---------- RED JOHN WALL ---------- */
+
+.red-wall{
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:
+    radial-gradient(ellipse at 50% 45%,#fff 0%,#fff 28%,#ddd 60%,#a4a4a4 100%);
+  border-top:1px solid #ddd;
+}
+
+.red-wall:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,transparent 49.8%,rgba(0,0,0,.07) 50%,transparent 50.2%);
+  opacity:.5;
+}
+
+.wall-copy{
+  position:absolute;
+  top:10%;
+  left:5%;
+  font:10px monospace;
+  letter-spacing:2px;
+  color:#777;
+}
+.wall-copy.right{
+  left:auto;
+  right:5%;
+  text-align:right;
+}
+
+.red-john{
+  width:min(420px,60vw);
+  opacity:.93;
+  filter:drop-shadow(0 25px 20px rgba(0,0,0,.16));
+  transition:transform .5s;
+}
+.red-john:hover{transform:scale(1.03)}
+
+.red-caption{
+  position:absolute;
+  bottom:10%;
+  text-align:center;
+  color:#555;
+  font:11px monospace;
+  letter-spacing:3px;
+}
+.red-caption strong{
+  display:block;
+  color:#222;
+  font-size:18px;
+  margin-top:8px;
+}
+.wall-mark.left{
+  top: 95%;
+}
+.wall-mark.right{
+  top: 95%;
+}
+/* ---------- FOOTER ---------- */
+
+footer{
+  background:#111;
+  color:#fff;
+  padding:30px 5%;
+  display:flex;
+  justify-content:space-between;
+  gap:25px;
+  flex-wrap:wrap;
+  font:10px monospace;
+  letter-spacing:1px;
+}
+footer span{color:#777}
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width:850px){
+  .hallway{
+    width:335px;
+    height:480px;
+  }
+  .hallway .wall-smiley{
+    width:min(62vw, 260px);
+    padding:6px;
+    filter:blur(15px) saturate(0.8) drop-shadow(0 0 0 rgba(0,0,0,0));
+  }
+
+  .nav-links{
+    display:none;
+    position:absolute;
+    left:0;right:0;top:55px;
+    padding:20px;
+    background:#f0f1f3;
+    border:1px solid #ddd;
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .nav-links.open{display:flex}
+  .menu{display:block}
+  .hero{padding-top:90px}
+  .hero-info{display:none}
+  .hero-center{width:100%;height:610px}
+  .door-frame{width:285px;height:450px}
+  .hero-buttons{width:90%;bottom:8px}
+  .btn{flex:1;text-align:center}
+  .about-grid,.project,.project.reverse{
+    grid-template-columns:1fr;
+    gap:45px;
+  }
+  .project.reverse .visual,.project.reverse .project-info{order:initial}
+  .visual{min-height:400px}
+  .section{padding:100px 22px}
+  .section-title{letter-spacing:-2px}
+  .skills-grid{grid-template-columns:1fr}
+  .resume-box{padding:35px;display:block}
+  .resume-actions{margin-top:35px}
+  .red-john{width:min(390px,80vw)}
+}
+
+[hidden]{display:none!important}
+/* PROJECT MEDIA: drop your own files into assets/media/<project>/ */
+.media-showcase{margin:38px 0 85px;border-top:1px solid #b9bdc3;padding-top:22px}
+.media-showcase h3{font-size:clamp(22px,3vw,34px);letter-spacing:-1px;margin:0 0 8px}
+.media-note{font:11px/1.6 monospace;color:#61656b;margin-bottom:18px}
+.media-layout{display:block}
+.media-screen{position:relative;min-height:290px;background:#17191d;border:8px solid #25282d;box-shadow:12px 12px 0 #d4d7dc;overflow:hidden}
+.media-screen video{display:block;width:100%;height:100%;min-height:290px;max-height:520px;object-fit:cover;background:#121417}
+.media-gallery{display:none}
+.media-placeholder{height:100%;min-height:135px;display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;font:11px/1.7 monospace;color:#777d85;word-break:break-word;background:repeating-linear-gradient(135deg,#e2e4e7 0,#e2e4e7 14px,#d8dbe0 14px,#d8dbe0 28px)}
+.media-screen .media-placeholder{min-height:290px;color:#b8bec7;background:repeating-linear-gradient(135deg,#1c1f24 0,#1c1f24 14px,#24282e 14px,#24282e 28px)}
+.viper-project{background:#e1e3e7;border:1px solid #c2c6cc;padding:36px;margin:30px 0 90px;box-shadow:14px 14px 0 #d0d3d8}
+.viper-project .project-info h2{font-size:clamp(42px,5vw,70px)}
+.viper-head{display:flex;align-items:start;justify-content:space-between;gap:25px}
+.viper-head .project-info{max-width:680px}
+.viper-project .media-showcase{margin-bottom:10px}
+.media-path{font:10px monospace;color:#555;display:block;margin-top:6px}
+
+/* ---------- LOOKOUT AI CROSSHAIR EFFECT ---------- */
+
+.crosshair-overlay{
+  position:absolute;
+  width:0;
+  height:0;
+  pointer-events:none;
+  z-index:500;
+  top:0;
+  left:0;
+}
+.crosshair-reticle{
+  position:relative;
+  width:140px;
+  height:140px;
+  margin-left:-70px;
+  margin-top:-70px;
+}
+.corner-mark{
+  position:absolute;
+  width:16px;
+  height:16px;
+  background:none;
+  border:2px solid #c0c0c0;
+}
+.corner-mark.top-left{
+  top:0;
+  left:0;
+  border-right:none;
+  border-bottom:none;
+  box-shadow:inset 2px 2px 0 rgba(255,255,255,.3);
+}
+.corner-mark.top-right{
+  top:0;
+  right:0;
+  border-left:none;
+  border-bottom:none;
+  box-shadow:inset -2px 2px 0 rgba(255,255,255,.3);
+}
+.corner-mark.bottom-left{
+  bottom:0;
+  left:0;
+  border-right:none;
+  border-top:none;
+  box-shadow:inset 2px -2px 0 rgba(255,255,255,.3);
+}
+.corner-mark.bottom-right{
+  bottom:0;
+  right:0;
+  border-left:none;
+  border-top:none;
+  box-shadow:inset -2px -2px 0 rgba(255,255,255,.3);
+}
+.center-dot{
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:#b51b1b;
+  border-radius:50%;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  box-shadow:0 0 12px rgba(181,27,27,.8),inset 0 0 3px rgba(255,255,255,.4);
+}
+.tracking-ring{
+  position:absolute;
+  width:100px;
+  height:100px;
+  border:1.5px solid rgba(181,27,27,.5);
+  border-radius:50%;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  animation:pulse-ring 2.5s infinite ease-in-out;
+  box-shadow:0 0 15px rgba(181,27,27,.2);
+}
+.crosshair-status{
+  position:absolute;
+  bottom:-32px;
+  left:50%;
+  transform:translateX(-50%);
+  color:#b51b1b;
+  font:10px monospace;
+  letter-spacing:3px;
+  white-space:nowrap;
+  text-shadow:0 0 10px rgba(181,27,27,.4);
+  font-weight:600;
+}
+@keyframes pulse-ring{
+  0%{
+    width:100px;
+    height:100px;
+    opacity:.7;
+    border-width:1.5px;
+  }
+  50%{
+    width:130px;
+    height:130px;
+    opacity:.3;
+    border-width:1px;
+  }
+  100%{
+    width:100px;
+    height:100px;
+    opacity:.7;
+    border-width:1.5px;
+  }
+}
+
+/* Reduce motion support */
+@media(prefers-reduced-motion:reduce){
+  .tracking-ring{
+    animation:none;
+    opacity:.5;
+  }
+}
+
+/* ---------- DYNAMIC GALLERY SYSTEM ---------- */
+
+.media-gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:18px;
+  margin-top:28px;
+}
+.media-thumbnail{
+  position:relative;
+  aspect-ratio:16/9;
+  background:#1a1c20;
+  border:1px solid #2a2d32;
+  cursor:pointer;
+  overflow:hidden;
+  transition:transform .2s,border-color .2s;
+}
+.media-thumbnail:hover{
+  transform:translateY(-3px);
+  border-color:#666;
+}
+.media-thumbnail:focus{
+  outline:2px solid var(--red);
+  outline-offset:2px;
+}
+.thumbnail-img,
+.thumbnail-video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.thumbnail-placeholder{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#1a1c20;
+  color:#666;
+  font-size:32px;
+  pointer-events:none;
+}
+.thumbnail-img.loaded + .thumbnail-placeholder,
+.thumbnail-video.loaded + .thumbnail-placeholder{
+  display:none;
+}
+
+/* ---------- LIGHTBOX ---------- */
+
+.lightbox-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.95);
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  transition:opacity .3s;
+}
+.lightbox-overlay.active{
+  opacity:1;
+}
+.lightbox-content{
+  position:relative;
+  width:90%;
+  height:90%;
+  max-width:1400px;
+  max-height:900px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.lightbox-media-container{
+  max-width:100%;
+  max-height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.lightbox-media-container img,
+.lightbox-media-container video{
+  max-width:100%;
+  max-height:85vh;
+  object-fit:contain;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.lightbox-media-container iframe{
+  width:min(90vw,1280px);
+  height:min(50.625vw,85vh,720px);
+  border:0;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.lightbox-close{
+  position:absolute;
+  top:-50px;
+  right:0;
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:32px;
+  cursor:pointer;
+  padding:10px;
+  transition:color .2s;
+  z-index:10;
+}
+.lightbox-close:hover{
+  color:var(--red);
+}
+.lightbox-nav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.3);
+  color:#fff;
+  font-size:28px;
+  width:50px;
+  height:50px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:background .2s;
+  z-index:10;
+}
+.lightbox-nav:hover{
+  background:rgba(255,255,255,.2);
+}
+.lightbox-prev{
+  left:20px;
+}
+.lightbox-next{
+  right:20px;
+}
+.lightbox-counter{
+  position:absolute;
+  bottom:-40px;
+  left:50%;
+  transform:translateX(-50%);
+  color:#999;
+  font:11px monospace;
+  letter-spacing:2px;
+}
+
+@media(max-width:760px){
+  .media-layout{grid-template-columns:1fr}
+  .media-gallery{grid-template-columns:1fr 1fr;gap:12px}
+  .viper-project{padding:20px}
+  .viper-head{display:block}
+  .lightbox-nav{width:40px;height:40px;font-size:20px}
+  .lightbox-prev{left:10px}
+  .lightbox-next{right:10px}
+  .lightbox-close{top:-40px;font-size:28px}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =======================================================
+     NAVIGATION
+     ======================================================= -->
+
+<nav>
+  <a class="logo" href="#home">FAHAD<span>.</span></a>
+
+  <button class="menu" id="menu" aria-label="Open navigation">☰</button>
+
+  <div class="nav-links" id="navLinks">
+    <a href="#home">HOME</a>
+    <a href="#work">WORK</a>
+    <a href="#viper">VIPER</a>
+    <a href="#about">ABOUT</a>
+    <a href="#education">EDUCATION</a>
+    <a href="#skills">SKILLS</a>
+    <a href="#contact">CONTACT</a>
+
+    <!-- REPLACE: Resume path -->
+    <a class="resume-link" href="assets/resume/Fahad-Pervez-Resume.pdf" target="_blank">
+      RESUME ↗
+    </a>
+  </div>
+</nav>
+
+<main>
+
+<!-- =======================================================
+     HERO
+     ======================================================= -->
+
+<section class="hero" id="home">
+
+  <div class="hero-center">
+
+
+    <!-- Hallway revealed when the glass door opens -->
+    <div class="hallway" aria-hidden="true">
+      <div class="ceiling"></div>
+      <div class="left-wall"></div>
+      <div class="right-wall"></div>
+      <div class="floor"></div>
+      <div class="back-wall"></div>
+
+      <div class="light one"></div>
+      <div class="light two"></div>
+      <div class="light three"></div>
+
+      <img
+        class="wall-smiley"
+        src="assets/media/redJohn2.jpg"
+        alt="Red smiley on the far hallway wall"
+      >
+
+      <div class="hallway-label">THE OTHER SIDE / FP</div>
+    </div>
+
+    <div class="door-shadow"></div>
+
+    <!-- CLICK THE DOOR -->
+    <div class="door-frame" id="door" tabindex="0"
+         role="button"
+         aria-label="Open glass pivot door"
+         aria-pressed="false">
+
+      <div class="door-glass">
+        <div class="door-label">
+          <span class="door-office-kicker">KARACHI / PAKISTAN</span>
+          <strong>MUHAMMAD<br>FAHAD PERVEZ</strong>
+          <div class="door-meta">
+            <span>AI / ML</span>
+            <span>BACKEND</span>
+            <span>COMPUTER VISION</span>
+            <span>ENGINEERING FOCUSED</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="metal top"></div>
+      <div class="metal bottom"></div>
+      <div class="metal left"></div>
+      <div class="metal right"></div>
+
+      <div class="center-bar"></div>
+      <div class="handle"></div>
+    </div>
+
+    <div class="wall-mark left">01 / GLASS ENTRY</div>
+    <div class="wall-mark right">BACKEND + AI</div>
+
+    <div class="hero-buttons">
+      <a class="btn dark" href="#work">VIEW MY WORK ↓</a>
+
+      <!-- REPLACE: Resume path -->
+      <a class="btn" href="assets/resume/Fahad-Pervez-Resume.pdf" target="_blank">
+        RESUME ↗
+      </a>
+    </div>
+  </div>
+
+  <div class="scroll">SCROLL TO ENTER ↓</div>
+</section>
+
+
+<!-- =======================================================
+     ABOUT
+     ======================================================= -->
+
+<section class="section" id="about">
+  <div class="section-label">02 / ABOUT</div>
+  <h1 class="section-title">THE ENGINEER<br><span>BEHIND THE SYSTEM.</span></h1>
+
+  <div class="about-grid">
+
+    <p class="about-copy">
+      Muhammad Fahad Pervez is a Computer Science undergraduate building
+      backend systems and AI-powered applications using Python, FastAPI,
+      PostgreSQL, machine learning, computer vision, n8n automation and modern web technologies.
+    </p>
+
+    <div class="about-card">
+      <div class="big">FP</div>
+      <h3>Bachelor of Computer Science</h3>
+      <p>University of Karachi · 2024–2027</p>
+      <br>
+      <p>
+        Focused on backend engineering, artificial intelligence,
+        machine learning and practical software development.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- EDUCATION & TRAINING: styled to match the existing portfolio -->
+<section class="section" id="education">
+  <div class="section-label">03 / EDUCATION & TRAINING</div>
+  <h1 class="section-title">LEARNING<br><span>BY BUILDING.</span></h1>
+  <div class="skills-grid">
+    <div class="skill"><div class="skill-no">EDUCATION / 01</div><h3>UNIVERSITY OF KARACHI</h3><p>Bachelor of Computer Science · 2024–2027</p></div>
+    <div class="skill"><div class="skill-no">EDUCATION / 02</div><h3>COMMECS COLLEGE</h3><p>Intermediate in General Sciences · 2021–2023</p></div>
+    <div class="skill"><div class="skill-no">TRAINING / 01</div><h3>UDEMY</h3><p>Complete Python Developer course</p><p>AI / Machine Learning A–Z course</p></div>
+    <div class="skill"><div class="skill-no">TRAINING / 02</div><h3>SAYLANI MASS IT</h3><p>Artificial Intelligence & Data Science course</p></div>
+  </div>
+</section>
+
+<!-- =======================================================
+     SELECTED WORK
+     ======================================================= -->
+
+<section class="section" id="work">
+
+  <div class="section-label">03 / SELECTED WORK</div>
+  <h1 class="section-title">SELECTED<br><span>WORK.</span></h1>
+
+
+  <!-- LOOKOUT -->
+  <article class="project">
+
+    <div class="visual lookout">
+      <div class="lookout-label top">LOOKOUT / LIVE · CAM_01</div>
+      <div class="scan"></div>
+      <div class="lookout-label bottom">TRACKING · SYSTEM ACTIVE</div>
+    </div>
+
+    <div class="project-info">
+      <div class="project-no">01</div>
+      <div class="category">AI / COMPUTER VISION / SECURITY</div>
+
+      <h2>LOOKOUT<br><span>AI</span></h2>
+
+      <p>
+        A computer-vision project focused on turning camera input
+        into an actionable detection workflow.
+      </p>
+
+      <div class="tags">
+        <span>PYTHON</span>
+        <span>OPENCV</span>
+        <span>FASTAPI</span>
+        <span>DOCKER</span>
+      </div>
+
+      <div class="links">
+
+        <!-- REPLACE: Lookout GitHub -->
+        <a href="https://github.com/fahad15fede/lookOut" target="_blank" rel="noopener noreferrer">GITHUB ↗</a>
+      </div>
+    </div>
+
+  </article>
+<div class="media-showcase" data-media="lookout">
+  <h3>LOOKOUT AI / MEDIA</h3>
+  <p class="media-note">Project media gallery.</p>
+</div>
+
+
+  <!-- TRAFFIC CRASH -->
+  <article class="project reverse">
+
+    <div class="project-info">
+      <div class="project-no">02</div>
+      <div class="category">MACHINE LEARNING / PREDICTION</div>
+
+      <h2>TRAFFIC CRASH<br><span>SEVERITY AI</span></h2>
+
+      <p>
+        AI-based application that predicts crash severity
+        from real-world accident data.
+      </p>
+
+      <div class="metrics">
+        <div class="metric">
+          <strong>200,000+</strong>
+          <small>ACCIDENT RECORDS</small>
+        </div>
+
+        <div class="metric">
+          <strong>~73%</strong>
+          <small>XGBOOST ACCURACY</small>
+        </div>
+
+        <div class="metric">
+          <strong>3</strong>
+          <small>MODELS COMPARED</small>
+        </div>
+      </div>
+
+      <div class="tags">
+        <span>DECISION TREE</span>
+        <span>RANDOM FOREST</span>
+        <span>XGBOOST</span>
+      </div>
+
+      <p>
+        Strong recall was maintained for identifying severe crashes.
+      </p>
+
+      <div class="links">
+        <!-- REPLACE: Crash AI Demo -->
+        <a href="https://traffic-crash-severity-ai.vercel.app/" target="_blank" rel="noopener noreferrer">LIVE DEMO ↗</a>
+
+        <!-- REPLACE: Crash AI GitHub -->
+        <a href="https://github.com/fahad15fede/traffic-crash-severity-AI" target="_blank" rel="noopener noreferrer">GITHUB ↗</a>
+      </div>
+    </div>
+
+    <div class="visual crash">
+      <div class="orbit"></div>
+      <div class="orbit two"></div>
+
+      <div class="crash-core">
+        <small>SEVERITY</small>
+        <strong>AI</strong>
+      </div>
+
+      <div class="crash-tag a">NO INJURY</div>
+      <div class="crash-tag b">MINOR</div>
+      <div class="crash-tag c">SEVERE</div>
+    </div>
+
+  </article>
+<div class="media-showcase" data-media="traffic-crash">
+  <h3>TRAFFIC CRASH SEVERITY AI / MEDIA</h3>
+  <p class="media-note">Project media gallery.</p>
+</div>
+
+
+  <!-- SPAM MAIL -->
+  <article class="project">
+
+    <div class="visual spam">
+
+      <div class="mail">
+
+        <div class="mail-top">
+          <span>NLP / DEEP LEARNING</span>
+          <span>FASTAPI</span>
+        </div>
+
+        <h4>URGENT: account verification required</h4>
+
+        <div class="mail-lines">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+
+        <div class="classify">
+          <small>CLASSIFICATION</small>
+          <strong>SPAM</strong>
+          <small>96% RECALL</small>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="project-info">
+      <div class="project-no">03</div>
+      <div class="category">NLP / DEEP LEARNING / API</div>
+
+      <h2>SPAM MAIL<br><span>DETECTOR AI</span></h2>
+
+      <p>
+        NLP/deep-learning email classifier that distinguishes spam
+        from legitimate email and provides predictions through
+        a FastAPI backend.
+      </p>
+
+      <div class="metrics">
+        <div class="metric">
+          <strong>~90%</strong>
+          <small>TEST ACCURACY</small>
+        </div>
+
+        <div class="metric">
+          <strong>96%</strong>
+          <small>SPAM RECALL</small>
+        </div>
+      </div>
+
+      <div class="tags">
+        <span>MLP</span>
+        <span>RNN</span>
+        <span>LSTM</span>
+        <span>NLP</span>
+        <span>FASTAPI</span>
+      </div>
+
+      <p>
+        Real-time predictions with confidence scores.
+      </p>
+
+      <div class="links">
+        <!-- REPLACE: Spam AI Demo -->
+        <a href="https://frontend-steel-omega-76.vercel.app/" target="_blank" rel="noopener noreferrer">LIVE DEMO ↗</a>
+
+        <!-- REPLACE: Spam AI GitHub -->
+        <a href="https://github.com/fahad15fede/email-spam-detector" target="_blank" rel="noopener noreferrer">GITHUB ↗</a>
+      </div>
+    </div>
+
+  </article>
+<div class="media-showcase" data-media="spam-detector">
+  <h3>SPAM MAIL DETECTOR AI / MEDIA</h3>
+  <p class="media-note">Project media gallery.</p>
+</div>
+
+
+
+<article class="viper-project" id="viper">
+ <div class="viper-head"><div class="project-info">
+  <div class="project-no">04 / FEATURED BUILD</div>
+  <div class="category">CUSTOM PROGRAMMING LANGUAGE / RAG / AUTOMATION</div>
+  <h2>VIPER<br><span>LANGUAGE + AI</span></h2>
+  <p>A custom programming language project with defined syntax, tokens, lexical analysis and grammar, accompanied by an AI documentation assistant built with retrieval-augmented generation. Explored n8n workflows and a LangChain-based approach to answering VIPER language questions.</p>
+  <div class="tags"><span>COMPILER DESIGN</span><span>CFG / DFA</span><span>PYTHON</span><span>RAG</span><span>LANGCHAIN</span><span>N8N</span><span>VECTOR SEARCH</span></div>
+ </div><div class="project-no">SYSTEM / 004</div></div>
+<div class="media-showcase" data-media="viper">
+  <h3>VIPER LANGUAGE & AI ASSISTANT / MEDIA</h3>
+  <p class="media-note">Project media gallery.</p>
+</div>
+</article>
+</section>
+
+
+<!-- =======================================================
+     SKILLS
+     ======================================================= -->
+
+<section class="section" id="skills">
+
+  <div class="section-label">04 / CAPABILITIES</div>
+  <h1 class="section-title">TECHNICAL<br><span>ARSENAL.</span></h1>
+
+  <div class="skills-grid">
+
+    <div class="skill">
+      <div class="skill-no">01</div>
+      <h3>BACKEND</h3>
+      <div class="skill-list">
+        <span>Python</span>
+        <span>FastAPI</span>
+        <span>REST APIs</span>
+        <span>PostgreSQL</span>
+        <span>MySQL</span>
+        <span>SQL</span>
+      </div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-no">02</div>
+      <h3>AI / ML</h3>
+      <div class="skill-list">
+        <span>Scikit-learn</span>
+        <span>TensorFlow / Keras</span>
+        <span>XGBoost</span>
+        <span>NLP</span>
+        <span>OpenCV</span>
+        <span>Computer Vision</span>
+        <span>LLMs</span>
+        <span>RAG</span>
+        <span>Data Preprocessing</span>
+      </div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-no">03</div>
+      <h3>DEVELOPMENT</h3>
+      <div class="skill-list">
+        <span>Python</span>
+        <span>Java</span>
+        <span>C++</span>
+        <span>JavaScript</span>
+        <span>Git / GitHub</span>
+        <span>Docker</span>
+        <span>n8n Workflow Automation</span>
+        <span>OOP</span>
+        <span>DSA</span>
+      </div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-no">04</div>
+      <h3>FRONTEND</h3>
+      <div class="skill-list">
+        <span>React.js</span>
+        <span>JavaScript</span>
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>UI / UX fundamentals</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =======================================================
+     RESUME
+     ======================================================= -->
+
+<section class="section">
+
+  <div class="resume-box">
+
+    <div>
+      <div class="section-label">DOCUMENT / 2026</div>
+      <h2>READ THE<br>RESUME.</h2>
+
+    </div>
+
+    <div class="resume-actions">
+
+      <!-- REPLACE: Resume path -->
+      <a class="btn dark" href="assets/resume/Fahad-Pervez-Resume.pdf" target="_blank">
+        VIEW RESUME ↗
+      </a>
+
+      <!-- REPLACE: Resume path -->
+      <a class="btn" href="assets/resume/Fahad-Pervez-Resume.pdf" download>
+        DOWNLOAD ↓
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     CONTACT
+     ======================================================= -->
+
+<section class="section contact" id="contact">
+
+  <div class="section-label">05 / CONTACT</div>
+
+  <h2>LET'S BUILD<br><span>SOMETHING.</span></h2>
+
+  <p class="contact-sub">
+    Available for internships, junior backend opportunities,
+    AI / ML opportunities and software engineering opportunities.
+  </p>
+
+  <div class="contact-list">
+
+    <!-- REPLACE: Email -->
+    <a href="mailto:fahadp0909@gmail.com">
+      <span>EMAIL</span>
+      <span>fahadp0909@gmail.com ↗</span>
+    </a>
+
+    <!-- REPLACE: GitHub -->
+    <a href="https://github.com/fahad15fede" target="_blank" rel="noopener noreferrer">
+      <span>GITHUB</span>
+      <span>github.com/fahad15fede ↗</span>
+    </a>
+
+    <!-- REPLACE: LinkedIn -->
+    <a href="#">
+      <span>LINKEDIN</span>
+      <span>YOUR_LINKEDIN_URL ↗</span>
+    </a>
+
+  </div>
+
+</section>
+
+<section class="section service-request" id="service-request">
+  <div class="section-label">06 / SERVICE INQUIRY</div>
+
+  <div class="service-form-box">
+    <div class="service-copy">
+      <h3>Request a service</h3>
+      <p>
+        Share your idea, project, or business challenge and I’ll get back with the right solution.
+      </p>
+    </div>
+
+    <form class="service-form" action="mailto:fahadp0909@gmail.com" method="post" enctype="text/plain">
+      <div class="form-row">
+        <label>
+          Name
+          <input type="text" name="name" placeholder="Your name" required>
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" placeholder="you@example.com" required>
+        </label>
+      </div>
+
+      <div class="form-row">
+        <label>
+          Service Needed
+          <select name="service">
+            <option>AI / ML Development</option>
+            <option>Backend Development</option>
+            <option>Computer Vision</option>
+            <option>Automation</option>
+            <option>Custom Software</option>
+          </select>
+        </label>
+        <label>
+          Budget Range
+          <input type="text" name="budget" placeholder="e.g. $500 - $2000">
+        </label>
+      </div>
+
+      <label>
+        Project Details
+        <textarea name="message" rows="5" placeholder="Tell me about your project, timeline, and goals..." required></textarea>
+      </label>
+
+      <button type="submit">SEND INQUIRY</button>
+    </form>
+  </div>
+</section>
+
+</main>
+
+
+<!-- =======================================================
+     FOOTER
+     ======================================================= -->
+
+<footer>
+  <div>
+    <strong>MUHAMMAD FAHAD PERVEZ</strong><br>
+    <span>BACKEND / AI</span>
+  </div>
+
+  <div>
+    BUILT WITH HTML, CSS &amp; JAVASCRIPT.
+  </div>
+
+  <div>
+    <!-- REPLACE: GitHub / LinkedIn / Email -->
+    <a href="https://github.com/fahad15fede" target="_blank" rel="noopener noreferrer">GITHUB</a> ·
+    <a href="#">LINKEDIN</a> ·
+    <a href="mailto:fahadp0909@gmail.com">EMAIL</a>
+    <span> · 2026</span>
+  </div>
+</footer>
+
+
+<script>
+/* =========================================================
+   VERY SMALL JAVASCRIPT
+   Only interaction needed for this single-file version.
+   ========================================================= */
+
+const door = document.getElementById("door");
+const menu = document.getElementById("menu");
+const navLinks = document.getElementById("navLinks");
+
+/* Door opens/closes when clicked */
+function toggleDoor(){
+  const opened = door.classList.toggle("open");
+  const heroCenter = door.closest(".hero-center");
+
+  if(heroCenter){
+    heroCenter.classList.toggle("door-open", opened);
+  }
+
+  door.setAttribute("aria-pressed", opened ? "true" : "false");
+  door.setAttribute("aria-label", opened ? "Close glass pivot door" : "Open glass pivot door");
+}
+
+door.addEventListener("click", toggleDoor);
+
+door.addEventListener("keydown", function(e){
+  if(e.key === "Enter" || e.key === " "){
+    e.preventDefault();
+    toggleDoor();
+  }
+});
+
+/* Mobile menu */
+menu.addEventListener("click", function(){
+  navLinks.classList.toggle("open");
+});
+
+navLinks.querySelectorAll("a").forEach(function(link){
+  link.addEventListener("click", function(){
+    navLinks.classList.remove("open");
+  });
+});
+
+/* Door state is controlled only by click / keyboard.
+   Scrolling no longer changes the door angle. */
+</script>
+
+
+<script>
+/* =========================================================
+   LOOKOUT AI CROSSHAIR EFFECT
+   Interactive targeting reticle for surveillance theme
+   ========================================================= */
+
+/**
+ * CrosshairEffect
+ * Displays custom targeting cursor within LookOut AI showcase
+ */
+class CrosshairEffect {
+  constructor(showcaseElement) {
+    this.showcase = showcaseElement;
+    this.overlay = null;
+    this.animationId = null;
+    this.isActive = false;
+    this.statusStates = ['TRACKING', 'TARGET LOCK', 'VISION ACTIVE'];
+    this.currentStatusIndex = 0;
+    this.statusCycleCounter = 0;
+    this.shouldInitialize = this.checkShouldInitialize();
+  }
+
+  /**
+   * Check if crosshair should initialize based on device and preferences
+   */
+  checkShouldInitialize() {
+    // Disable on touch devices
+    if (!window.matchMedia('(pointer: fine)').matches) {
+      return false;
+    }
+
+    // Disable when reduced motion is preferred
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   * Initialize the crosshair effect
+   */
+  initialize() {
+    if (!this.shouldInitialize) {
+      return;
+    }
+
+    this.createCrosshairDOM();
+    this.attachEventListeners();
+  }
+
+  /**
+   * Create crosshair HTML structure
+   */
+  createCrosshairDOM() {
+    this.overlay = document.createElement('div');
+    this.overlay.className = 'crosshair-overlay';
+    this.overlay.setAttribute('aria-hidden', 'true');
+    this.overlay.innerHTML = `
+      <div class="crosshair-reticle">
+        <div class="corner-mark top-left"></div>
+        <div class="corner-mark top-right"></div>
+        <div class="corner-mark bottom-left"></div>
+        <div class="corner-mark bottom-right"></div>
+        <div class="center-dot"></div>
+        <div class="tracking-ring"></div>
+      </div>
+      <div class="crosshair-status">TRACKING</div>
+    `;
+    this.overlay.style.display = 'none';
+    this.showcase.style.position = 'relative';
+    this.showcase.appendChild(this.overlay);
+  }
+
+  /**
+   * Attach event listeners for mouse tracking
+   */
+  attachEventListeners() {
+    this.showcase.addEventListener('mouseenter', () => this.show());
+    this.showcase.addEventListener('mouseleave', () => this.hide());
+    this.showcase.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+  }
+
+  /**
+   * Show the crosshair
+   */
+  show() {
+    if (this.overlay) {
+      this.overlay.style.display = 'block';
+      this.isActive = true;
+    }
+  }
+
+  /**
+   * Hide the crosshair
+   */
+  hide() {
+    if (this.overlay) {
+      this.overlay.style.display = 'none';
+      this.isActive = false;
+    }
+    if (this.animationId) {
+      cancelAnimationFrame(this.animationId);
+    }
+  }
+
+  /**
+   * Handle mouse movement within showcase
+   */
+  handleMouseMove(e) {
+    if (!this.isActive || !this.overlay) return;
+
+    this.animationId = requestAnimationFrame(() => {
+      const rect = this.showcase.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      this.updatePosition(x, y);
+      this.updateStatus();
+    });
+  }
+
+  /**
+   * Update crosshair position
+   */
+  updatePosition(x, y) {
+    const transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+    this.overlay.style.transform = transform;
+  }
+
+  /**
+   * Cycle through status text
+   */
+  updateStatus() {
+    const statusEl = this.overlay.querySelector('.crosshair-status');
+    if (statusEl) {
+      this.statusCycleCounter++;
+      if (this.statusCycleCounter > 120) {
+        this.statusCycleCounter = 0;
+        this.currentStatusIndex = (this.currentStatusIndex + 1) % this.statusStates.length;
+        statusEl.textContent = this.statusStates[this.currentStatusIndex];
+      }
+    }
+  }
+
+  /**
+   * Destroy the crosshair effect
+   */
+  destroy() {
+    if (this.overlay && this.overlay.parentNode) {
+      this.overlay.parentNode.removeChild(this.overlay);
+    }
+    if (this.animationId) {
+      cancelAnimationFrame(this.animationId);
+    }
+    this.overlay = null;
+  }
+}
+
+/* =========================================================
+   MEDIA GALLERY SYSTEM
+   Dynamic media galleries with lightbox and lazy loading
+   ========================================================= */
+
+/**
+ * MediaManifestLoader
+ * Loads and validates the media manifest JSON file
+ */
+class MediaManifestLoader {
+  constructor() {
+    this.manifest = null;
+  }
+
+  /**
+   * Load manifest from specified path
+   * @param {string} manifestPath - Path to media.json
+   * @returns {Promise<Object>} Parsed manifest data
+   */
+  async loadManifest(manifestPath) {
+    try {
+      const response = await fetch(manifestPath);
+      if (!response.ok) {
+        throw new Error(`Failed to load manifest: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      if (!this.validateManifest(data)) {
+        console.warn('Invalid manifest structure, using empty manifest');
+        this.manifest = {};
+        return this.manifest;
+      }
+      
+      this.manifest = data;
+      return this.manifest;
+      
+    } catch (error) {
+      console.error('Error loading media manifest:', error);
+      this.manifest = {};
+      return this.manifest;
+    }
+  }
+
+  /**
+   * Validate manifest structure
+   * @param {*} data - Data to validate
+   * @returns {boolean} True if valid
+   */
+  validateManifest(data) {
+    if (!data || typeof data !== 'object' || Array.isArray(data)) {
+      return false;
+    }
+
+    // Check that all values are arrays
+    for (const [key, value] of Object.entries(data)) {
+      if (!Array.isArray(value)) {
+        console.warn(`Invalid manifest: ${key} is not an array`);
+        return false;
+      }
+
+      // Validate media items
+      for (const item of value) {
+        if (!item.type || (
+          item.type === 'youtube'
+            ? typeof item.videoId !== 'string' || !item.videoId
+            : !item.path
+        )) {
+          console.warn(`Invalid media item in ${key}: missing required fields`);
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
+
+  /**
+   * Get media items for a specific project
+   * @param {string} projectName - Name of the project
+   * @returns {Array|null} Array of media items or null
+   */
+  getProjectMedia(projectName) {
+    if (!this.manifest) {
+      return null;
+    }
+    return this.manifest[projectName] || null;
+  }
+}
+
+/**
+ * GalleryRenderer
+ * Renders thumbnail grids for project galleries
+ */
+class GalleryRenderer {
+  constructor(manifestLoader) {
+    this.manifestLoader = manifestLoader;
+  }
+
+  /**
+   * Render gallery for a specific project
+   * @param {string} projectName - Name of the project
+   * @param {HTMLElement} container - Container element
+   */
+  renderProject(projectName, container) {
+    const mediaItems = this.manifestLoader.getProjectMedia(projectName);
+    
+    if (!mediaItems || mediaItems.length === 0) {
+      // Hide the entire media showcase if no media
+      container.style.display = 'none';
+      return;
+    }
+
+    // Clear existing content except title/note
+    const existingGallery = container.querySelector('.media-gallery');
+    if (existingGallery) {
+      existingGallery.remove();
+    }
+
+    // Create gallery grid
+    const gallery = document.createElement('div');
+    gallery.className = 'media-gallery';
+    gallery.setAttribute('data-project', projectName);
+
+    // Add thumbnails
+    mediaItems.forEach((item, index) => {
+      const thumbnail = this.createThumbnail(item, index, projectName);
+      gallery.appendChild(thumbnail);
+    });
+
+    container.appendChild(gallery);
+  }
+
+  /**
+   * Create a thumbnail element
+   * @param {Object} mediaItem - Media item data
+   * @param {number} index - Item index
+   * @param {string} projectName - Project name
+   * @returns {HTMLElement} Thumbnail element
+   */
+  createThumbnail(mediaItem, index, projectName) {
+    const figure = document.createElement('figure');
+    figure.className = 'media-thumbnail';
+    figure.setAttribute('data-index', index);
+    figure.setAttribute('tabindex', '0');
+    figure.setAttribute('role', 'button');
+    figure.setAttribute('aria-label', `View ${mediaItem.alt || 'media'}`);
+
+    if (mediaItem.type === 'video') {
+      // Video thumbnail
+      const video = document.createElement('video');
+      video.setAttribute('data-src', mediaItem.path);
+      video.className = 'thumbnail-video';
+      video.setAttribute('preload', 'metadata');
+      if (mediaItem.alt) {
+        video.setAttribute('aria-label', mediaItem.alt);
+      }
+
+      // Placeholder
+      const placeholder = document.createElement('div');
+      placeholder.className = 'thumbnail-placeholder';
+      placeholder.textContent = '▶';
+
+      figure.appendChild(video);
+      figure.appendChild(placeholder);
+    } else if (mediaItem.type === 'youtube') {
+      const img = document.createElement('img');
+      img.setAttribute(
+        'data-src',
+        `https://img.youtube.com/vi/${encodeURIComponent(mediaItem.videoId)}/hqdefault.jpg`
+      );
+      img.className = 'thumbnail-img';
+      img.alt = mediaItem.alt || 'YouTube video thumbnail';
+
+      const placeholder = document.createElement('div');
+      placeholder.className = 'thumbnail-placeholder';
+      placeholder.textContent = '▶';
+
+      figure.appendChild(img);
+      figure.appendChild(placeholder);
+    } else {
+      // Image thumbnail
+      const img = document.createElement('img');
+      img.setAttribute('data-src', mediaItem.path);
+      img.className = 'thumbnail-img';
+      img.alt = mediaItem.alt || '';
+
+      // Placeholder
+      const placeholder = document.createElement('div');
+      placeholder.className = 'thumbnail-placeholder';
+
+      figure.appendChild(img);
+      figure.appendChild(placeholder);
+    }
+
+    return figure;
+  }
+}
+
+/**
+ * LazyLoadManager
+ * Handles lazy loading of images using IntersectionObserver
+ */
+class LazyLoadManager {
+  constructor() {
+    this.observer = null;
+    this.initObserver();
+  }
+
+  initObserver() {
+    const options = {
+      root: null,
+      rootMargin: '50px',
+      threshold: 0.01
+    };
+
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.loadMedia(entry.target);
+          this.observer.unobserve(entry.target);
+        }
+      });
+    }, options);
+  }
+
+  /**
+   * Observe an element for lazy loading
+   * @param {HTMLElement} element - Element to observe
+   */
+  observe(element) {
+    if (this.observer) {
+      this.observer.observe(element);
+    }
+  }
+
+  /**
+   * Load media from data-src to src
+   * @param {HTMLElement} element - Image or video element
+   */
+  loadMedia(element) {
+    const src = element.getAttribute('data-src');
+    if (!src) return;
+
+    element.addEventListener('load', () => {
+      element.classList.add('loaded');
+      const placeholder = element.nextElementSibling;
+      if (placeholder && placeholder.classList.contains('thumbnail-placeholder')) {
+        placeholder.style.display = 'none';
+      }
+    });
+
+    element.addEventListener('error', () => {
+      console.warn(`Failed to load media: ${src}`);
+      const placeholder = element.nextElementSibling;
+      if (placeholder && placeholder.classList.contains('thumbnail-placeholder')) {
+        placeholder.textContent = '✕';
+        placeholder.style.color = '#999';
+      }
+    });
+
+    element.src = src;
+    element.removeAttribute('data-src');
+  }
+
+  disconnect() {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+  }
+}
+
+/**
+ * Lightbox
+ * Full-screen media viewer with navigation
+ */
+class Lightbox {
+  constructor() {
+    this.overlay = null;
+    this.mediaItems = [];
+    this.currentIndex = 0;
+    this.projectName = '';
+  }
+
+  /**
+   * Open lightbox with media items
+   * @param {Array} mediaItems - Array of media items
+   * @param {number} startIndex - Starting index
+   * @param {string} projectName - Project name
+   */
+  open(mediaItems, startIndex, projectName) {
+    this.mediaItems = mediaItems;
+    this.currentIndex = startIndex;
+    this.projectName = projectName;
+
+    this.createOverlay();
+    this.showMedia(this.currentIndex);
+    this.attachEventListeners();
+
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+  }
+
+  createOverlay() {
+    this.overlay = document.createElement('div');
+    this.overlay.className = 'lightbox-overlay';
+    this.overlay.innerHTML = `
+      <div class="lightbox-content">
+        <button class="lightbox-close" aria-label="Close lightbox">✕</button>
+        <div class="lightbox-media-container"></div>
+        <button class="lightbox-nav lightbox-prev" aria-label="Previous">&lt;</button>
+        <button class="lightbox-nav lightbox-next" aria-label="Next">&gt;</button>
+        <div class="lightbox-counter"></div>
+      </div>
+    `;
+    document.body.appendChild(this.overlay);
+
+    // Fade in
+    setTimeout(() => this.overlay.classList.add('active'), 10);
+  }
+
+  /**
+   * Show media at specified index
+   * @param {number} index - Media index
+   */
+  showMedia(index) {
+    const container = this.overlay.querySelector('.lightbox-media-container');
+    const item = this.mediaItems[index];
+
+    // Clear previous media
+    container.innerHTML = '';
+
+    // Pause any existing videos
+    const existingVideos = this.overlay.querySelectorAll('video');
+    existingVideos.forEach(v => v.pause());
+
+    if (item.type === 'video') {
+      const video = document.createElement('video');
+      video.src = item.path;
+      video.controls = true;
+      video.autoplay = false;
+      video.muted = true;
+      if (item.alt) {
+        video.setAttribute('aria-label', item.alt);
+      }
+      container.appendChild(video);
+    } else if (item.type === 'youtube') {
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(item.videoId)}?autoplay=1&rel=0`;
+      iframe.title = item.alt || 'YouTube video';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      container.appendChild(iframe);
+    } else {
+      const img = document.createElement('img');
+      img.src = item.path;
+      img.alt = item.alt || '';
+      container.appendChild(img);
+    }
+
+    // Update counter
+    const counter = this.overlay.querySelector('.lightbox-counter');
+    counter.textContent = `${index + 1} / ${this.mediaItems.length}`;
+
+    // Update navigation button visibility
+    const prevBtn = this.overlay.querySelector('.lightbox-prev');
+    const nextBtn = this.overlay.querySelector('.lightbox-next');
+
+    if (this.mediaItems.length <= 1) {
+      prevBtn.style.display = 'none';
+      nextBtn.style.display = 'none';
+    } else {
+      prevBtn.style.display = 'flex';
+      nextBtn.style.display = 'flex';
+    }
+  }
+
+  next() {
+    this.currentIndex = (this.currentIndex + 1) % this.mediaItems.length;
+    this.showMedia(this.currentIndex);
+  }
+
+  previous() {
+    this.currentIndex = (this.currentIndex - 1 + this.mediaItems.length) % this.mediaItems.length;
+    this.showMedia(this.currentIndex);
+  }
+
+  close() {
+    // Pause any videos
+    const videos = this.overlay.querySelectorAll('video');
+    videos.forEach(v => v.pause());
+
+    // Fade out
+    this.overlay.classList.remove('active');
+    setTimeout(() => {
+      if (this.overlay && this.overlay.parentNode) {
+        this.overlay.parentNode.removeChild(this.overlay);
+      }
+      this.overlay = null;
+    }, 300);
+
+    // Restore body scroll
+    document.body.style.overflow = '';
+
+    this.removeEventListeners();
+  }
+
+  attachEventListeners() {
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+
+    document.addEventListener('keydown', this.handleKeyDown);
+
+    const closeBtn = this.overlay.querySelector('.lightbox-close');
+    const prevBtn = this.overlay.querySelector('.lightbox-prev');
+    const nextBtn = this.overlay.querySelector('.lightbox-next');
+
+    closeBtn.addEventListener('click', () => this.close());
+    prevBtn.addEventListener('click', () => this.previous());
+    nextBtn.addEventListener('click', () => this.next());
+
+    this.overlay.addEventListener('click', this.handleClick);
+  }
+
+  removeEventListeners() {
+    document.removeEventListener('keydown', this.handleKeyDown);
+  }
+
+  handleKeyDown(e) {
+    if (e.key === 'Escape') {
+      this.close();
+    } else if (e.key === 'ArrowLeft') {
+      this.previous();
+    } else if (e.key === 'ArrowRight') {
+      this.next();
+    }
+  }
+
+  handleClick(e) {
+    if (e.target === this.overlay) {
+      this.close();
+    }
+  }
+}
+
+// Initialize Gallery System
+document.addEventListener('DOMContentLoaded', async () => {
+  const manifestLoader = new MediaManifestLoader();
+  const renderer = new GalleryRenderer(manifestLoader);
+  const lazyLoader = new LazyLoadManager();
+  const lightbox = new Lightbox();
+
+  // Load manifest
+  await manifestLoader.loadManifest('assets/media/media.json');
+
+  // Initialize CrosshairEffect for LookOut AI
+  const lookoutShowcase = document.querySelector('.project:has(.lookout)');
+  if (lookoutShowcase) {
+    const crosshair = new CrosshairEffect(lookoutShowcase);
+    crosshair.initialize();
+  }
+
+  // Find all media showcases and render galleries
+  const showcases = document.querySelectorAll('.media-showcase[data-media]');
+  
+  showcases.forEach(showcase => {
+    const projectName = showcase.getAttribute('data-media');
+    renderer.renderProject(projectName, showcase);
+
+    // Setup lazy loading for thumbnails
+    const thumbnails = showcase.querySelectorAll('.thumbnail-img, .thumbnail-video');
+    thumbnails.forEach(thumb => lazyLoader.observe(thumb));
+
+    // Attach lightbox click handlers
+    const thumbElements = showcase.querySelectorAll('.media-thumbnail');
+    thumbElements.forEach(thumb => {
+      const clickHandler = () => {
+        const index = parseInt(thumb.getAttribute('data-index'));
+        const mediaItems = manifestLoader.getProjectMedia(projectName);
+        if (mediaItems) {
+          lightbox.open(mediaItems, index, projectName);
+        }
+      };
+
+      thumb.addEventListener('click', clickHandler);
+      thumb.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          clickHandler();
+        }
+      });
+    });
+  });
+});
+</script>
+
+<script>
+// Graceful empty media frames: add your files without editing the HTML.
+document.querySelectorAll('.media-showcase').forEach(showcase => {
+  showcase.querySelectorAll('figure img').forEach(img => {
+    const placeholder = img.nextElementSibling;
+    if (!placeholder) return;
+    img.addEventListener('error', () => { img.hidden = true; placeholder.hidden = false; });
+    if (img.complete && img.naturalWidth === 0) { img.hidden = true; placeholder.hidden = false; }
+  });
+
+  const video = showcase.querySelector('video');
+  if (!video) return;
+
+  const placeholder = video.nextElementSibling;
+  if (!placeholder) return;
+
+  const fail = () => { video.hidden = true; placeholder.hidden = false; };
+  video.addEventListener('error', fail);
+  const source = video.querySelector('source');
+  if (source) source.addEventListener('error', fail);
+  video.addEventListener('loadedmetadata', () => { video.hidden = false; placeholder.hidden = true; });
+});
+</script>
+</body>
+</html>
